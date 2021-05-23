@@ -2,7 +2,7 @@
     "name": "github-jobs-tm-wds",
     "version": "0.1.0",
     "private": true,
-    "proxy": "https://jobs.github.com",
+    "proxy": "https://cors-anywhere.herokuapp.com/https://jobs.github.com",
     "homepage": "https://robiparvez.github.io/react-github-jobs",
     "dependencies": {
         "@testing-library/jest-dom": "^5.12.0",
