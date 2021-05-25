@@ -2,7 +2,9 @@ import axios from 'axios';
 import { useReducer, useEffect } from 'react';
 
 // const BASE_URL = '/positions.json';
-const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
+// const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
+const BASE_URL = 'https://secret-ocean-49799.herokuapp.com/https://jobs.github.com/positions.json';
+// const BASE_URL = 'https://corsanywhere.herokuapp.com/https://jobs.github.com/positions.json';
 
 const ACTIONS = {
     MAKE_REQUEST: 'make-request',
