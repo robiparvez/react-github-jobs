@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import useFetchJobs from './hooks/useFetchJobs';
 import Job from './components/Job';
-import JobsPagination from './components/JobsPagination';
+// import JobsPagination from './components/JobsPagination';
 import SearchForm from './components/SearchForm';
 
 function App() {
-    const title = 'GITHUB JOBS';
+    const title = 'REMOTIVE JOBS';
     const [params, setParams] = useState({});
     const [page, setPage] = useState(1);
     const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
@@ -25,7 +25,7 @@ function App() {
             <SearchForm params={params} onParamChange={handleParamsChange} />
 
             {/* Pagination - Top */}
-            <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />
+            {/* <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} /> */}
 
             {loading && <h1>Loading...</h1>}
 
@@ -35,7 +35,7 @@ function App() {
             })}
 
             {/* Pagination - Bottom */}
-            <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />
+            {/* <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} /> */}
         </Container>
     );
 }

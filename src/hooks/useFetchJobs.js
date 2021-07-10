@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { useReducer, useEffect } from 'react';
 
-// const BASE_URL = '/positions.json';
-// const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json';
-const BASE_URL = 'https://secret-ocean-49799.herokuapp.com/https://jobs.github.com/positions.json';
-// const BASE_URL = 'https://corsanywhere.herokuapp.com/https://jobs.github.com/positions.json';
+// const BASE_URL = 'https://remotive.io/api/remote-jobs';
+const BASE_URL = 'https://remotive.io/api/remote-jobs?limit=200';
 
 const ACTIONS = {
     MAKE_REQUEST: 'make-request',
@@ -43,12 +41,16 @@ const useFetchJobs = (params, page) => {
         axios
             .get(BASE_URL, {
                 cancelToken: cancelToken1.token,
-                params: { markdown: true, page: page, ...params }
+                // params: { markdown: true, page: page, ...params }
+                params: { ...params }
             })
             .then((res) => {
-                dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } });
+                console.log(res.data.jobs);
+                // dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } });
+                dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data.jobs } });
             })
             .catch((err) => {
+                // console.log(err);
                 if (axios.isCancel(err)) return;
                 dispatch({ type: ACTIONS.ERROR, payload: { error: err } });
             });
@@ -58,10 +60,12 @@ const useFetchJobs = (params, page) => {
         axios
             .get(BASE_URL, {
                 cancelToken: cancelToken2.token,
-                params: { markdown: true, page: page, ...params }
+                // params: { markdown: true, page: page, ...params }
+                params: { ...params }
             })
             .then((res) => {
-                dispatch({ type: ACTIONS.UPDATE_HAS_NEXT_PAGE, payload: { hasNextPage: res.data.length !== 0 } });
+                // dispatch({ type: ACTIONS.UPDATE_HAS_NEXT_PAGE, payload: { hasNextPage: res.data.length !== 0 } });
+                dispatch({ type: ACTIONS.UPDATE_HAS_NEXT_PAGE, payload: { hasNextPage: res.data.jobs.length !== 0 } });
             })
             .catch((err) => {
                 if (axios.isCancel(err)) return;

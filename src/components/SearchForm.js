@@ -4,19 +4,27 @@ const SearchForm = ({ params, onParamChange }) => {
     return (
         <Form className='mb-4'>
             <Form.Row className='align-items-end'>
-                {/* Description */}
+
+                {/* Title/Description */}
                 <Form.Group as={Col}>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control type='text' name='description' onChange={onParamChange} value={params.description} />
+                    <Form.Label>Title/Description</Form.Label>
+                    <Form.Control type='text' name='search' onChange={onParamChange} value={params.search} />
                 </Form.Group>
-                {/* Location */}
+
+                {/* Category */}
                 <Form.Group as={Col}>
-                    <Form.Label>Location</Form.Label>
-                    <Form.Control type='text' name='location' onChange={onParamChange} value={params.location} />
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control type='text' name='category' onChange={onParamChange} value={params.category} />
+                </Form.Group>
+
+                {/* Company */}
+                <Form.Group as={Col}>
+                    <Form.Label>Company</Form.Label>
+                    <Form.Control type='text' name='company_name' onChange={onParamChange} value={params.company_name} />
                 </Form.Group>
 
                 {/* Full-time */}
-                <Form.Group as={Col} xs='auto'>
+                {/* <Form.Group as={Col} xs='auto'>
                     <Form.Check
                     onChange={onParamChange}
                     value={params.full_time}
@@ -26,7 +34,7 @@ const SearchForm = ({ params, onParamChange }) => {
                     type='switch'
                     className='mb-2'
                     />
-                </Form.Group>
+                </Form.Group> */}
             </Form.Row>
         </Form>
     );

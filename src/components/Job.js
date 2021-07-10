@@ -1,33 +1,40 @@
 import { useState } from 'react';
 import { Badge, Button, Card, Collapse } from 'react-bootstrap';
-import ReactMarkdown from 'react-markdown';
+import parse from 'html-react-parser';
 
-const Job = ({ job }) => {
-    const DEFAULT_COMPANY_LOGO = 'https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
-
+const Job = ({ job: { title, company_name, publication_date, job_type, candidate_required_location, description } }) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen((state) => !state);
     };
 
+    const removeUnderScoreAndConvertToCamelCase = (str) => {
+        var i,
+            frags = str.split('_');
+        for (i = 0; i < frags.length; i++) {
+            frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+        }
+        return frags.join(' ');
+    };
+
     return (
         <Card className='mb-3'>
             <Card.Body>
-                <div className='d-flex justify-content-between'>
+                <div className='d-flex justify-content-between mb-3'>
                     <div>
                         <Card.Title>
-                            {job.title} - <span className='text-muted'>{job.company}</span>
+                            {title} - <span className='text-muted'>{company_name}</span>
                         </Card.Title>
-                        <Card.Subtitle className='text-muted mb-2'>{new Date(job.created_at).toLocaleDateString()}</Card.Subtitle>
-                        <Badge variant='secondary mr-2'>{job.type}</Badge>
-                        <Badge variant='secondary'>{job.location}</Badge>
-                        <div style={{ wordBreak: 'break-all' }}>
-                            <ReactMarkdown children={job.how_to_apply} />
-                        </div>
-                    </div>
 
-                    <img className='d-none d-md-block' height='50' alt='company-logo' src={job.company_logo ?? DEFAULT_COMPANY_LOGO} />
+                        <Card.Subtitle className='text-muted mb-2'>
+                            {new Date(publication_date).toLocaleDateString()} {new Date(publication_date).toLocaleTimeString()}
+                        </Card.Subtitle>
+
+                        <Badge variant='secondary mr-2'>{removeUnderScoreAndConvertToCamelCase(job_type)}</Badge>
+
+                        <Badge variant='secondary'>{candidate_required_location}</Badge>
+                    </div>
                 </div>
 
                 <Card.Text>
@@ -37,9 +44,7 @@ const Job = ({ job }) => {
                 </Card.Text>
 
                 <Collapse in={open}>
-                    <div className='mt-4'>
-                        <ReactMarkdown children={job.description} />
-                    </div>
+                    <div>{parse(description)}</div>
                 </Collapse>
             </Card.Body>
         </Card>
